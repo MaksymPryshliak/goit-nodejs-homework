@@ -10,4 +10,3 @@ const validateId = (req, _, next) => {
 };
 
 module.exports = validateId;
-
