@@ -1,7 +1,7 @@
 const express = require("express");
 const ctrl = require("../../controllers/auth");
 const { tryCatchWrapper } = require("../../utils");
-const { validateBody, authentification } = require("../../middlewares");
+const { validateBody, authentification, upload } = require("../../middlewares");
 const schema = require("../../schemas");
 const router = express.Router();
 
@@ -20,6 +20,13 @@ router.post(
 router.get("/current", authentification, tryCatchWrapper(ctrl.getCurrent));
 
 router.get("/logout", authentification, tryCatchWrapper(ctrl.logout));
+
+router.patch(
+  "/avatars",
+  authentification,
+  upload.single("avatar"),
+  tryCatchWrapper(ctrl.updateAvatar)
+);
 
 router.patch(
   "/",
