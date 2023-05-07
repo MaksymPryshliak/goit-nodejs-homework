@@ -28,6 +28,14 @@ router.patch(
   tryCatchWrapper(ctrl.updateAvatar)
 );
 
+router.post(
+  "/verify",
+  validateBody(schema.emailVerify),
+  tryCatchWrapper(ctrl.resendEmail)
+);
+
+router.get("/verify/:verificationToken", tryCatchWrapper(ctrl.verifyEmail));
+
 router.patch(
   "/",
   validateBody(schema.subscribeSchema),
